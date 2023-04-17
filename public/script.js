@@ -7,8 +7,8 @@ const API_URL =
 
 messageForm.addEventListener("submit", (e) => {
   e.preventDefault();
-  const body = messageInput.value;
-  const message = { body };
+  const text = messageInput.value;
+  const message = { text };
   console.log(message);
 
   fetch(API_URL, {

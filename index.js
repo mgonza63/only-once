@@ -1,20 +1,31 @@
-const express = require('express');
-const app = express()
-const PORT = 3000;
+const express = require("express");
+const app = express();
+const dotenv = require("dotenv");
+dotenv.config();
+const mongoose = require("mongoose");
+const Message = require("./model/message");
 
-app.set('view engine', 'ejs')
-app.use(express.static('public'))
+const PORT = process.env.PORT;
+const MONGO_URI = `mongodb+srv://mgonza63:${process.env.MONGO_PASS}@cluster0.nf9vkkq.mongodb.net/?retryWrites=true&w=majority`;
 
-app.use(express.urlencoded({ extended: true }))
-app.use(express.json())
+app.set("view engine", "ejs");
+app.use(express.static("public"));
 
-app.get('/', (req, res) => {
-    res.render('home')
-})
-app.post('/', (req, res) => {
-    console.log(req.body)
-})
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+mongoose.connect(MONGO_URI);
+
+app.get("/", (req, res) => {
+  res.render("home");
+});
+app.post("/", async (req, res) => {
+//   console.log(req.body.text);
+  const message = new Message({ text: req.body.text });
+  await message.save()
+  console.log(message);
+});
 
 app.listen(PORT, () => {
-    console.log(`app listening in http://localhost:${PORT}`)
-})
+  console.log(`app listening in http://localhost:${PORT}`);
+});
