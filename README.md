@@ -5,4 +5,4 @@ This is an app that allows users to send a link with a message once the message 
 Node.js
 Express
 MongoDB
-Ejs
+EJS
