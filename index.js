@@ -25,6 +25,13 @@ app.post("/", async (req, res) => {
   await message.save()
   console.log(message);
 });
+app.get("/:id", async (req, res) => {
+    // myObjectIdString = myObjectId.toString()
+    // const message = await Message.findOne({ uuid: req.body.id })
+    const message = await Message.findById(req.params.id).exec()
+    console.log(message)
+    res.send(message)
+});
 
 app.listen(PORT, () => {
   console.log(`app listening in http://localhost:${PORT}`);
