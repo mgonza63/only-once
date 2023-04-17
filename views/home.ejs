@@ -1,12 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
-</head>
-<body>
-    <h1>You are safe here</h1>
-</body>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>You are safe here</h1>
+
+      <form action="POST" id="messageForm">
+        <label for="message">Enter your message here:</label>
+        <textarea type="text" name="message" id="messageInput" required></textarea>
+        <button type="submit">Create Message</button>
+      </form>
+    </div>
+    <script src="/script.js"></script>
+  </body>
 </html>
