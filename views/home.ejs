@@ -14,10 +14,47 @@
 
       <form action="POST" id="messageForm">
         <label for="message">Enter your message here:</label>
-        <textarea type="text" name="message" id="messageInput" required></textarea>
+        <textarea
+          type="text"
+          name="message"
+          id="messageInput"
+          required
+        ></textarea>
         <button type="submit">Create Message</button>
+        <h2>Here's the link with your one time message:</h2>
+        <p class="link-url"></p>
       </form>
     </div>
-    <script src="/script.js"></script>
+    <script>
+      const messageForm = document.querySelector("form");
+      const messageInput = document.querySelector("#messageInput");
+      const urlElement = document.querySelector(".link-url");
+      const API_URL =
+        window.location.hostname === "localhost"
+          ? "http://localhost:3000/"
+          : "prodlink";
+
+      messageForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const text = messageInput.value;
+        const message = { text };
+        console.log(message);
+        try {
+          const response = await fetch(API_URL, {
+            method: "POST",
+            body: JSON.stringify(message),
+            headers: {
+              "content-type": "application/json",
+            },
+          });
+          const onetimeURL = await response.json();
+          onetimeLink = `${API_URL}${onetimeURL}`;
+          urlElement.innerText = onetimeLink;
+          messageForm.clear();
+        } catch (error) {
+          console.log(error);
+        }
+      });
+    </script>
   </body>
 </html>

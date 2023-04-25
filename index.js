@@ -20,19 +20,40 @@ app.get("/", (req, res) => {
   res.render("home");
 });
 app.post("/", async (req, res) => {
-//   console.log(req.body.text);
   const message = new Message({ text: req.body.text });
-  await message.save()
+  await message.save();
   console.log(message);
+  res.status(200).json(message._id);
 });
 app.get("/:id", async (req, res) => {
-    // myObjectIdString = myObjectId.toString()
-    // const message = await Message.findOne({ uuid: req.body.id })
-    const message = await Message.findById(req.params.id).exec()
-    console.log(message)
-    res.send(message)
-});
+  const message = await Message.findById(req.params.id).exec();
 
+  try {
+    if (message !== null) {
+      res.render("message");
+    } else {
+      res.redirect("/");
+    }
+  } catch (error) {
+    console.log(error);
+    res.redirect("/");
+  }
+});
+app.get("/message/:id", async (req, res) => {
+  try {
+    const message = await Message.findByIdAndDelete(req.params.id).exec();
+
+    if (message !== null) {
+      res.status(200).json(message);
+      console.log('object deleted:', message);
+    } else {
+      res.status(400).json({ text: "The message has been deleted" });
+    }
+  } catch (error) {
+    console.log(error);
+    res.redirect("/");
+  }
+});
 app.listen(PORT, () => {
   console.log(`app listening in http://localhost:${PORT}`);
 });
