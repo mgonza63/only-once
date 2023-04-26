@@ -22,7 +22,7 @@
       const API_URL =
         window.location.hostname === "localhost"
           ? `http://localhost:3000/message${window.location.pathname}`
-          : "prodlink";
+          : `https://www.only-once.com${window.location.pathname}`;
       revealButton.addEventListener("click", async (e) => {
         try {
           const response = await fetch(API_URL, {
