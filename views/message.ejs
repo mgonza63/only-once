@@ -7,13 +7,8 @@
     <title>Your One Time Message Is Here</title>
     <link rel="stylesheet" href="style.css" />
   </head>
-  <style>
-    .d-none {
-      display: none;
-    }
-  </style>
   <body>
-    <button id="revealButton">Click to reveal your message</button>
+    <button class="button-primary" id="revealButton">Click to reveal your message</button>
     <p class="message" id="message"></p>
     <script>
       const revealButton = document.querySelector("#revealButton");
@@ -35,6 +30,7 @@
           });
           const onetimeMessage = await response.json();
           message.innerText = onetimeMessage.text;
+          revealButton.disabled = 'true'
         } catch (error) {
           console.log(error);
         }

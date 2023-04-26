@@ -5,26 +5,41 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
-
+    <link rel="shortcut icon" href="mg_logo.svg" type="image/x-icon" />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="container">
-      <h1>You are safe here</h1>
-
-      <form action="POST" id="messageForm">
-        <label for="message">Enter your message here:</label>
-        <textarea
-          type="text"
-          name="message"
-          id="messageInput"
-          required
-        ></textarea>
-        <button type="submit">Create Message</button>
-        <h2>Here's the link with your one time message:</h2>
-        <p class="link-url"></p>
-      </form>
-    </div>
+    <header>
+      <div class="container">
+        <span class="only-once">ONLYonce</span>
+      </div>
+    </header>
+    <main>
+      <div class="container">
+        <h1>Type your one time message...</h1>
+        <p class="subheading">and get a link that can only reveal it once</p>
+        <form action="POST" id="messageForm">
+          <label for="message">Enter your message here:</label>
+          <textarea
+            type="text"
+            name="message"
+            id="messageInput"
+            placeholder="My only once message is..."
+            required
+          ></textarea>
+          <button class="button-primary" type="submit">Create Message</button>
+          <h2>Here's the link with your one time message:</h2>
+          <p class="link-url"></p>
+        </form>
+      </div>
+    </main>
+    <footer>
+      <div class="container">
+        <div class="footer-body">
+          <span>by </span><a href="http://mau.vision" target="_blank" rel="noopener noreferrer"><img src="mg_logo.svg" alt="MG logo" class="logo" /></a>
+        </div>
+      </div>
+    </footer>
     <script>
       const messageForm = document.querySelector("form");
       const messageInput = document.querySelector("#messageInput");
@@ -52,8 +67,7 @@
         } catch (error) {
           console.log(error);
         }
-        messageInput.value = '';
-
+        messageInput.value = "";
       });
     </script>
   </body>
