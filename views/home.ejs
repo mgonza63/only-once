@@ -32,13 +32,12 @@
       const API_URL =
         window.location.hostname === "localhost"
           ? "http://localhost:3000/"
-          : "prodlink";
+          : "https://www.only-once.com/";
 
       messageForm.addEventListener("submit", async (e) => {
         e.preventDefault();
         const text = messageInput.value;
         const message = { text };
-        console.log(message);
         try {
           const response = await fetch(API_URL, {
             method: "POST",
@@ -50,10 +49,11 @@
           const onetimeURL = await response.json();
           onetimeLink = `${API_URL}${onetimeURL}`;
           urlElement.innerText = onetimeLink;
-          messageForm.clear();
         } catch (error) {
           console.log(error);
         }
+        messageInput.value = '';
+
       });
     </script>
   </body>

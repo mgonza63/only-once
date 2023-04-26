@@ -32,7 +32,6 @@
             },
           });
           const onetimeMessage = await response.json();
-          console.log(onetimeMessage)
           message.innerText = onetimeMessage.text;
         } catch (error) {
           console.log(error);
