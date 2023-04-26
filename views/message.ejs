@@ -18,11 +18,13 @@
     <script>
       const revealButton = document.querySelector("#revealButton");
       const message = document.querySelector("#message");
-
       const API_URL =
         window.location.hostname === "localhost"
           ? `http://localhost:3000/message${window.location.pathname}`
           : `https://www.only-once.com${window.location.pathname}`;
+
+      console.log(API_URL);
+
       revealButton.addEventListener("click", async (e) => {
         try {
           const response = await fetch(API_URL, {
