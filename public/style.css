@@ -23,6 +23,10 @@ label {
     display: block;
     margin-block: 0.5rem;
 }
+a {
+    color: #060606;
+    text-decoration: none;
+}
 textarea {
     display: block;
     font-family: inherit;

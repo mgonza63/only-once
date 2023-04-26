@@ -8,4 +8,4 @@ MongoDB
 EJS
 
 ## TODOS
-Loading states, rate limiting
+Loading states, rate limiting, hashing, copy to clipboard
