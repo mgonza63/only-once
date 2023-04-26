@@ -88,3 +88,14 @@ footer {
     max-width: 40px;
     width: 100%;
 }
+.message-container {
+    border: 2px solid #060606;
+    border-radius: 1rem;
+    margin: 1rem 0;
+    padding: 1rem;
+    min-height: 5rem;
+    background: #eef2f3;
+}
+.message {
+    margin: 0;
+}

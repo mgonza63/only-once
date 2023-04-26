@@ -8,8 +8,32 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <button class="button-primary" id="revealButton">Click to reveal your message</button>
-    <p class="message" id="message"></p>
+    <header>
+      <div class="container">
+        <span class="only-once">ONLYonce</span>
+      </div>
+    </header>
+    <main>
+      <div class="container">
+        <button class="button-primary" id="revealButton">
+          Click to reveal your message
+        </button>
+
+        <div class="message-container" id="">
+          <p class="message" id="message"></p>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <div class="container">
+        <div class="footer-body">
+          <span>by </span
+          ><a href="http://mau.vision" target="_blank" rel="noopener noreferrer"
+            ><img src="mg_logo.svg" alt="MG logo" class="logo"
+          /></a>
+        </div>
+      </div>
+    </footer>
     <script>
       const revealButton = document.querySelector("#revealButton");
       const message = document.querySelector("#message");
@@ -30,7 +54,9 @@
           });
           const onetimeMessage = await response.json();
           message.innerText = onetimeMessage.text;
-          revealButton.disabled = 'true'
+          revealButton.disabled = "true";
+          revealButton.style.opacity = "0.6";
+          revealButton.style.cursor = "not-allowed";
         } catch (error) {
           console.log(error);
         }
