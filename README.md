@@ -6,3 +6,6 @@ Node.js
 Express
 MongoDB
 EJS
+
+## TODOS
+Loading states, rate limiting
