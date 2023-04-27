@@ -1,5 +1,7 @@
 const express = require("express");
 const app = express();
+const rateLimit = require('express-rate-limit')
+
 const dotenv = require("dotenv");
 dotenv.config();
 const mongoose = require("mongoose");
@@ -11,14 +13,25 @@ const MONGO_URI = `mongodb+srv://mgonza63:${process.env.MONGO_PASS}@cluster0.nf9
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 
+const limiter = rateLimit({
+	windowMs: 3 * 60 * 1000, // 3 minutes
+	max: 10, // Limit each IP to 10 requests per `window` (here, per 3 minutes)
+	standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+	legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+})
+
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+app.use(express.json({ limit: '10kb' }));
 
 mongoose.connect(MONGO_URI);
 
 app.get("/", (req, res) => {
   res.render("home");
 });
+
+// Apply the rate limiting middleware to post requests
+app.use(limiter)
+
 app.post("/", async (req, res) => {
   const message = new Message({ text: req.body.text });
   await message.save();

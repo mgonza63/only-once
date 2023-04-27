@@ -8,4 +8,4 @@ MongoDB
 EJS
 
 ## TODOS
-Loading states, rate limiting, hashing, copy to clipboard
+Loading states, error handling (size limit, too many requests), hashing, copy to clipboard, maybe use other type of uuid to prevent people of guessing a random url string and get a message.
