@@ -30,16 +30,18 @@ app.get("/", (req, res) => {
 });
 
 // Apply the rate limiting middleware to post requests
-app.use(limiter)
+// app.use(limiter)
 
-app.post("/", async (req, res) => {
+app.post("/", limiter, async (req, res) => {
   const message = new Message({ text: req.body.text });
   await message.save();
   console.log(message);
   res.status(200).json(message._id);
 });
 app.get("/:id", async (req, res) => {
+  // console.log(req.params.id)
   const message = await Message.findById(req.params.id).exec();
+  console.log(message);
 
   try {
     if (message !== null) {

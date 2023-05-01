@@ -28,15 +28,19 @@
             required
           ></textarea>
           <button class="button-primary" type="submit">Create Message</button>
-          <h2>Here's the link with your one time message:</h2>
-          <p class="link-url"></p>
+
         </form>
+        <h2>Here's the link with your one time message:</h2>
+        <p class="link-url"></p>
       </div>
     </main>
     <footer>
       <div class="container">
         <div class="footer-body">
-          <span>by </span><a href="http://mau.vision" target="_blank" rel="noopener noreferrer"><img src="mg_logo.svg" alt="MG logo" class="logo" /></a>
+          <span>by </span
+          ><a href="http://mau.vision" target="_blank" rel="noopener noreferrer"
+            ><img src="mg_logo.svg" alt="MG logo" class="logo"
+          /></a>
         </div>
       </div>
     </footer>
@@ -49,6 +53,7 @@
           ? "http://localhost:3000/"
           : "https://www.only-once.com/";
 
+      const clipboardToast = `<div class="toast">Link copied to clipboard!<div>`;
       messageForm.addEventListener("submit", async (e) => {
         e.preventDefault();
         const text = messageInput.value;
@@ -61,16 +66,49 @@
               "content-type": "application/json",
             },
           });
+          let errorElement = document.querySelector('.error');
+          if (errorElement != null) {
+            errorElement.remove()
+          }
+
           const onetimeURL = await response.json();
           onetimeLink = `${API_URL}${onetimeURL}`;
           urlElement.innerText = onetimeLink;
-        } catch (error) {
-          console.log(error);
-          // urlElement.innerText = error;
+          urlElement.style.padding = '0.5rem';
 
+          messageInput.style.pointerEvents = "none";
+          messageInput.style.opacity = "0.2";
+          setTimeout(() => {
+            messageInput.style.pointerEvents = "all";
+            messageInput.style.opacity = "1";
+          }, 3000);
+          handleCopyboard();
+        } catch (error) {
+          console.error(error);
+          let errorElement = `<p class="error">Too many requests... Wait a couple minutes and comeback</p>`
+          messageForm.insertAdjacentHTML('beforeend', errorElement)
+          // urlElement.innerText = error;
         }
         messageInput.value = "";
       });
+      urlElement.addEventListener('click', () => {
+        handleCopyboard()
+      })
+      async function handleCopyboard() {
+        let toastElement = document.querySelector(".toast");
+        if (toastElement === null) {
+          await navigator.clipboard.writeText(onetimeLink);
+          document.body.insertAdjacentHTML("beforeend", clipboardToast);
+
+          setTimeout(() => {
+            toastElement = document.querySelector(".toast");
+            toastElement.style.animation = "fadedown 300ms ease 100ms both";
+
+            toastElement.remove()
+
+          }, 3000);
+        }
+      }
     </script>
   </body>
 </html>

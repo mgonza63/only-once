@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Your One Time Message Is Here</title>
+    <link rel="shortcut icon" href="mg_logo.svg" type="image/x-icon" />
+
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -42,15 +44,15 @@
           ? `http://localhost:3000/message${window.location.pathname}`
           : `https://www.only-once.com/message${window.location.pathname}`;
 
-      console.log(API_URL);
+      // console.log(API_URL);
 
       revealButton.addEventListener("click", async (e) => {
         try {
           const response = await fetch(API_URL, {
             method: "GET",
-            headers: {
-              "content-type": "application/json",
-            },
+            // headers: {
+            //   "content-type": "application/json",
+            // },
           });
           const onetimeMessage = await response.json();
           message.innerText = onetimeMessage.text;

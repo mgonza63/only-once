@@ -103,3 +103,51 @@ footer {
 .message {
     margin: 0;
 }
+.link-url {
+    background-color: #060606;
+    color: #dbe4e5;
+    border-radius: 5rem;
+    width: fit-content;
+    cursor: pointer;
+}
+.toast {
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    padding: 1rem;
+    border-radius: 5rem;
+    position: absolute;
+    bottom: 2rem;
+    transform: translateX(-50%);
+    left: 50%;
+    background-color: #060606;
+    color: #dbe4e5;
+    animation: fadeup 300ms ease 100ms forwards;
+    opacity: 0;
+    text-align: center;
+}
+.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+}
+.error {
+    color: rgb(209, 24, 24);
+}
+@keyframes fadeup {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, 1rem);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, 0rem);
+    }
+}
+@keyframes fadedown {
+    0% {
+        opacity: 1;
+        /* transform: translate(-50%, 0rem); */
+    }
+    100% {
+        opacity: 0;
+        /* transform: translate(-50%, 1rem); */
+    }
+}
