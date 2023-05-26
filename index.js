@@ -29,24 +29,22 @@ app.get("/", (req, res) => {
   res.render("home");
 });
 
-// Apply the rate limiting middleware to post requests
-// app.use(limiter)
-
 app.post("/", limiter, async (req, res) => {
   const message = new Message({ text: req.body.text });
   await message.save();
-  console.log(message);
+  console.log('POST', message);
   res.status(200).json(message._id);
 });
 app.get("/:id", async (req, res) => {
   // console.log(req.params.id)
-  const message = await Message.findById(req.params.id).exec();
+  const message = await Message.findById(req.params.id);
   console.log(message);
 
   try {
     if (message !== null) {
       res.render("message");
     } else {
+      console.log('message deleted')
       res.redirect("/");
     }
   } catch (error) {
@@ -56,7 +54,8 @@ app.get("/:id", async (req, res) => {
 });
 app.get("/message/:id", async (req, res) => {
   try {
-    const message = await Message.findByIdAndDelete(req.params.id).exec();
+    console.log('API REQUEST BODY:', req.params.id)
+    const message = await Message.findByIdAndDelete(req.params.id);
 
     if (message !== null) {
       res.status(200).json(message);
