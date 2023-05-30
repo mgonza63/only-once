@@ -30,18 +30,21 @@ app.get("/", (req, res) => {
 });
 
 app.post("/", limiter, async (req, res) => {
-  const message = new Message({ text: req.body.text });
-  await message.save();
-  console.log('POST', message);
-  res.status(200).json(message._id);
+  try {
+    const message = new Message({ text: req.body.text });
+    await message.save();
+    console.log('SUCCESSFULLY POSTED:', message);
+    res.status(200).json(message._id);
+  } catch (error) {
+    console.error(error)
+  }
 });
 app.get("/:id", async (req, res) => {
   // console.log(req.params.id)
-  const message = await Message.findById(req.params.id);
-  console.log(message);
-
   try {
+    const message = await Message.findById(req.params.id);
     if (message !== null) {
+      console.log('LINK ACCESSED:', message);
       res.render("message");
     } else {
       console.log('message deleted')
@@ -54,12 +57,11 @@ app.get("/:id", async (req, res) => {
 });
 app.get("/message/:id", async (req, res) => {
   try {
-    console.log('API REQUEST BODY:', req.params.id)
     const message = await Message.findByIdAndDelete(req.params.id);
-
     if (message !== null) {
+      console.log('MESSAGE ACCESSED:', req.params.id)
       res.status(200).json(message);
-      console.log('object deleted:', message);
+      console.log('MESSAGE DELETED:', message);
     } else {
       res.status(400).json({ text: "The message has been deleted" });
     }
