@@ -50,9 +50,9 @@
         try {
           const response = await fetch(API_URL, {
             method: "GET",
-            // headers: {
-            //   "content-type": "application/json",
-            // },
+            headers: {
+              "content-type": "application/json",
+            },
           });
           const onetimeMessage = await response.json();
           message.innerText = onetimeMessage.text;
